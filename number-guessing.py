@@ -14,8 +14,11 @@ def main():
     )
     
     difficulty = input('Select one of the above: ')
+    rand_num = random.randint(1, 100)
+    attempts_left = 0
+    attempts = 0
     
-    # Handling invalid input
+    # Handling invalid input and selecting difficulty
     while True:
         try:
             difficulty = int(difficulty)
@@ -24,17 +27,52 @@ def main():
             else:
                 if difficulty == 1:
                     print('Selected easy difficult. You have 12 attempts')
+                    attempts_left = 12
                     break
                 elif difficulty == 2:
                     print('Selected medium difficult. You have 8 attempts')
+                    attempts_left = 8
                     break
                 else:
                     print('Selected hard difficult. You have 5 attempts')
+                    attempts_left = 5
                     break
         except ValueError:
             difficulty = input('Please enter a number: ')
     
     print('\nStarting the game!')
-    
+
+    while attempts_left > 0:
+        # Read a valid guess without consuming attempts for invalid input
+        while True:
+            guess_input = input('Enter your guess: ')
+            try:
+                guess = int(guess_input)
+                if guess < 1 or guess > 100:
+                    print('Please enter a number between 1 and 100.\n')
+                    continue
+                break
+            except ValueError:
+                print('Please, enter a valid integer between 1 and 100.\n')
+                continue
+
+        # Valid guess: consume an attempt
+        attempts_left -= 1
+        attempts += 1
+
+        if guess == rand_num:
+            print(f'Congratulations! You have guessed the number in {attempts} attempts')
+            break
+        elif guess > rand_num:
+            print(f'Incorrect! The number is lower than {guess}')
+            print(f'You have {attempts_left} attempts left\n')
+        else:
+            print(f'Incorrect! The number is greater than {guess}')
+            print(f'You have {attempts_left} attempts left\n')
+
+    if attempts_left == 0 and guess != rand_num:
+        print(f'Game over! The number was {rand_num}\n')
+
+
 if __name__ == '__main__':
     main()
