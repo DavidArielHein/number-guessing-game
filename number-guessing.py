@@ -7,12 +7,28 @@ def main():
         'I will think in a number between 1 and 100\n'
         'Select the difficult to determine the number of guessings you will have\n'
     )
+    
+    # First play
+    game()
+    
+    while True:
+        # Asking the user if wants to play another time
+        keep_playing = input('Do you want to play again? Enter "yes" for keep playing: ')
+        if keep_playing.lower() == 'yes':
+            game()
+        else:
+            print('Thanks for playing!')
+            break
+
+
+def game():
     print(
         '1. Easy (12 attempts)\n'
         '2. Medium (8 attempts)\n'
         '3. Hard (5 attempts)\n'
     )
     
+    # Variables
     difficulty = input('Select one of the above: ')
     rand_num = random.randint(1, 100)
     attempts_left = 0
@@ -43,7 +59,7 @@ def main():
     print('\nStarting the game!')
 
     while attempts_left > 0:
-        # Read a valid guess without consuming attempts for invalid input
+        # Re-read a valid guess in case of invalid input
         while True:
             guess_input = input('Enter your guess: ')
             try:
