@@ -13,7 +13,7 @@ def main():
     
     while True:
         # Asking the user if wants to play another time
-        keep_playing = input('Do you want to play again? Enter "yes" for keep playing: ')
+        keep_playing = input('Do you want to play again?\n Enter "yes" for keep playing: ')
         if keep_playing.lower() == 'yes':
             game()
         else:
